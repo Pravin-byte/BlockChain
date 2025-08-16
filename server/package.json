@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "postinstall": "cd ../client && npm install && npm run build && cp -r dist/* ./public/"
+    "postinstall": "cd ../client && npm install && npm run build && mkdir -p ../server/public && cp -r dist/* ../server/public/"
   },
   "author": "",
   "license": "ISC",
