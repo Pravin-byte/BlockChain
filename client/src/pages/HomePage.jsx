@@ -18,12 +18,12 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const [lastBlock, setLastBlock] = useState(null);
 
-
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   // Fetch blockchain data
   const fetchBlockchain = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/chain");
+      const response = await axios.get(`${BACKEND_URL}/api/chain`);
       setBlockchainData(response.data);
       if (response.data.chain.length > 0) {
         setLastBlock(response.data.chain[response.data.chain.length - 1]);
@@ -44,7 +44,7 @@ function HomePage() {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:5000/api/transactions/new", {
+      const response = await axios.post(`${BACKEND_URL}/api/transactions/new`, {
         sender: transactionForm.sender,
         recipient: transactionForm.recipient,
         amount: parseFloat(transactionForm.amount)
@@ -83,7 +83,7 @@ function HomePage() {
         clearInterval(nonceInterval);
 
         // Call the API to actually mine the block
-        const response = await axios.get("http://localhost:5000/api/mine");
+        const response = await axios.get(`${BACKEND_URL}/api/mine`);
         setMinedMessage(response.data.message); // "New Block Forged"
         setMiningActive(false);
 
