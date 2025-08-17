@@ -13,6 +13,8 @@ function PuzzlePage() {
   const [loading, setLoading] = useState(false);
   const [difficulty, setDifficulty] = useState(4);
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const checkSolution = async () => {
     if (!data || !nonce) {
       setMessage("Please enter both data and nonce values");
@@ -22,7 +24,7 @@ function PuzzlePage() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:5000/api/mininig",
+        `${BACKEND_URL}/api/mininig`,
         { data, nonce: Number(nonce), difficulty: Number(difficulty) },
         { headers: { "Content-Type": "application/json" } }
       );
